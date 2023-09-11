@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface ICategoryDal : IRepository<Category>
+    public interface IAboutDal: IRepository<About> 
     {
-        //CRUD operasyonunu metot olarak tanımlayacağız
-        //Metotun tipi ismi ();  --->Type Name();
-
     }
 }
