@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,15 @@ namespace MVCProjeKampi.Controllers
     public class CategoryController : Controller
     {
         // GET: Category
-        CategoryManager cm=new CategoryManager();  //businessLayerda oluşturduğumuz sınıfı çağırıyoruz
+        CategoryManager cm=new CategoryManager(new EfCategoryDal());  //businessLayerda oluşturduğumuz sınıfı çağırıyoruz
         public ActionResult Index()
         {
             return View();
         }
         public ActionResult GetCategoryList()
         {
-            //var categoryvalues = cm.GetAllBL(); //var değişkeni sayısal, alfabetik veriler, karakterleri kapsıyor
-            return View();
+            var categoryvalues = cm.GetList(); //var değişkeni sayısal, alfabetik veriler, karakterleri kapsıyor
+            return View(categoryvalues);
         }
         [HttpGet]
         public ActionResult AddCategory()
