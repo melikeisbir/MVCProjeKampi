@@ -18,12 +18,18 @@ namespace MVCProjeKampi.Controllers
         }
         public ActionResult GetCategoryList()
         {
-            var categoryvalues = cm.GetAllBL(); //var değişkeni sayısal, alfabetik veriler, karakterleri kapsıyor
-            return View(categoryvalues);
+            //var categoryvalues = cm.GetAllBL(); //var değişkeni sayısal, alfabetik veriler, karakterleri kapsıyor
+            return View();
         }
+        [HttpGet]
+        public ActionResult AddCategory()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult AddCategory(Category p) 
         {
-            cm.CategoryAddBL(p);
+          //  cm.CategoryAddBL(p);
             return RedirectToAction("GetCategoryList");
         }
     }
