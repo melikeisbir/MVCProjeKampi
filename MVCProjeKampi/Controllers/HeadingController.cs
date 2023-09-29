@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 
 namespace MVCProjeKampi.Controllers
@@ -27,29 +28,51 @@ namespace MVCProjeKampi.Controllers
                                                    select new SelectListItem
                                                    {
                                                        Text = x.CategoryName,
-                                                       Value=x.CategoryID.ToString(),
+                                                       Value = x.CategoryID.ToString(),
                                                    }
                                                    ).ToList(); //ilgili tablonun bütün değerlerini alacak -- verileri dropdownlist aracılığıyla listeleyecek
             List<SelectListItem> valuewriter = (from x in wm.GetList()
                                                 select new SelectListItem
                                                 {
-                                                    Text = x.WriterName+ "" +x.WriterSurName,
+                                                    Text = x.WriterName + "" + x.WriterSurName,
                                                     Value = x.WriterID.ToString()
                                                 }).ToList();
-            ViewBag.vlc=valueacategory; //view tarafına taşıma
+            ViewBag.vlc = valueacategory; //view tarafına taşıma
             ViewBag.vlw = valuewriter;
             return View();
         }
         [HttpPost]
         public ActionResult AddHeading(Heading p)
         {
-            p.HeadingDate= DateTime.Parse(DateTime.Now.ToShortDateString());
+            p.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             hm.HeadingAdd(p);
             return RedirectToAction("Index");
         }
-        public ActionResult ContentByHeading() //içeriğe göre başlık getirme
+        [HttpGet]
+        public ActionResult EditHeading(int id)
         {
-            return View();
+            List<SelectListItem> valueacategory = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString(),
+                                                   }
+                                                   ).ToList();
+            ViewBag.vlc = valueacategory;
+            var HeadingValue = hm.GetByID(id);
+            return View(HeadingValue);
+        }
+        [HttpPost]
+        public ActionResult EditHeading(Heading p)
+        {
+            hm.HeadingUpdate(p);
+            return RedirectToAction("Index");
+        }
+        public ActionResult DeleteHeading(int id)
+        {
+            var HeadingValue=hm.GetByID(id);
+            hm.HeadingDelete(HeadingValue);
+            return RedirectToAction("Index");
         }
     }
 }
