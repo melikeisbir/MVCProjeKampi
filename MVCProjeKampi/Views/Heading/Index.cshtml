@@ -113,11 +113,23 @@
                                         </i>
                                         Düzenle
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="/Heading/DeleteHeading/@item.HeadingID">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Sil
-                                    </a>
+                                    @*<a class="btn btn-danger btn-sm" href="/Heading/DeleteHeading/@item.HeadingID">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Sil
+                                        </a>*@
+                                    @if (item.HeadingStatus == true)
+                                    {
+                                        <a class="btn btn-sm" href="/Heading/DeleteHeading/@item.HeadingID" style=" padding-right: 28px; color: white; background: #006400;">
+                                            <i style="padding-left: 2px; " class="fas fa-check"></i> Aktif
+                                        </a>
+                                    }
+                                    else if (item.HeadingStatus == false)
+                                    {
+                                        <a class="btn btn-sm" href="/Heading/DeleteHeading/@item.HeadingID" style=" padding-right: 25px; color: white; background: #db0000;">
+                                            <i style="padding-left: 2px; padding-right: 9px;" class="fas fa-times"></i>Pasif
+                                        </a>
+                                    }
                                 </td>
                             </tr>
                         }
