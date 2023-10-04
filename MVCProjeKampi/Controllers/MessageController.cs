@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
@@ -13,6 +14,7 @@ namespace MVCProjeKampi.Controllers
     {
         // GET: Message
         MessageManager cm = new MessageManager(new EfMessageDal());
+        //MessageValidator messageValidator = new MessageValidator();
         public ActionResult Inbox()
         {
             var messagelist = cm.GetListInbox();

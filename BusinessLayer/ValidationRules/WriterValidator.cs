@@ -16,15 +16,10 @@ namespace BusinessLayer.ValidationRules
             RuleFor(x => x.WriterName).NotEmpty().WithMessage("Yazar adını boş geçemezsiniz.");
             RuleFor(x => x.WriterSurName).NotEmpty().WithMessage("Yazar soyadını boş geçemezsiniz.");
             RuleFor(x => x.WriterAbout).NotEmpty().WithMessage("Hakkında kısmını boş geçemezsiniz.");
+            RuleFor(x => x.WriterAbout).NotEmpty().WithMessage("Hakkında kısmını boş geçemezsiniz").Must(x => x.Contains('a')).WithMessage("Hakkında bilgisinde 'a' karakteri bulunmalıdır.");
             RuleFor(x => x.WriterTitle).NotEmpty().WithMessage("Ünvan Kısmını boş geçemezsiniz.");
             RuleFor(x => x.WriterSurName).MinimumLength(2).WithMessage("Lütfen en az 2 karakter girişi yapın.");
-            //RuleFor(x => x.WriterSurName).MaximumLength(50).WithMessage("Lütfen 50 karakterden fazla değer girişi yapmayın");
-            //RuleFor(x => x.WriterAbout).Must(x => x.Contains("a")).WithMessage("Hakkında kısmında mutlaka 'a' karakteri bulunmalıdır");
+            RuleFor(x => x.WriterSurName).MaximumLength(50).WithMessage("Lütfen 50 karakterden fazla değer girişi yapmayın");
         }
-        //public bool MustBeA(string arg)
-        //{
-        //    var result = arg.Contains("A") || arg.Contains("a");
-        //    return result;
-        //}
     }
 }
