@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public Message GetByID(int id)
         {
-            throw new NotImplementedException();
+            return _messageDal.Get(x=>x.MessageID== id);    
         }
 
         public void MessageDelete(Message message)
