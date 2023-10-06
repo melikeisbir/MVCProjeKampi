@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <div class="row">
                 @Html.Action("MessageListMenu", "Contact")
-                <!--<div class="col-md-3">
+                <div class="col-md-3">
                 <a href="mailbox.html" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
                 <div class="card">
                     <div class="card-header">
@@ -70,11 +70,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>-->
-                <!-- /.card-body -->
-                <!--</div>-->
-                <!-- /.card -->
-                <!--<div class="card">
+                    </div>
+                 /.card-body 
+                </div>
+                 /.card 
+                <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Labels</h3>
                     <div class="card-tools">
@@ -82,9 +82,9 @@
                             <i class="fas fa-minus"></i>
                         </button>
                     </div>
-                </div>-->
-                <!-- /.card-header -->
-                <!--<div class="card-body p-0">
+                </div>
+                 /.card-header 
+                <div class="card-body p-0">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="far fa-circle text-danger"></i> Important</a>
@@ -96,12 +96,12 @@
                             <a class="nav-link" href="#"><i class="far fa-circle text-primary"></i> Social</a>
                         </li>
                     </ul>
-                </div>-->
-                <!-- /.card-body -->
-                <!--</div>-->
-                <!-- /.card -->
-                <!--</div>-->
-                <!-- /.col -->
+                </div>
+                 /.card-body 
+                </div>
+                 /.card 
+                </div>
+                 /.col 
                 <div class="col-md-9">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
@@ -117,7 +117,7 @@
                                 <h5>Konu: @Html.DisplayFor(x => x.Subject)</h5>
                                 <br />
                                 <h6>
-                                    Mail: @Html.DisplayFor(x => x.UserMail)
+                                    Mail: @Html.DisplayFor(x => x.SenderMail)
                                     <span class="mailbox-read-time float-right">15 Feb. 2015 11:03 PM</span>
                                 </h6>
                             </div>
@@ -141,7 +141,7 @@
                             </div>
                             <!-- /.mailbox-controls -->
                             <div class="mailbox-read-message">
-                                <p>@Html.DisplayFor(x => x.Message)</p>
+                                <p>@Html.DisplayFor(x => x.MessageContent)</p>
                             </div>
                             <!-- /.mailbox-read-message -->
                         </div>
