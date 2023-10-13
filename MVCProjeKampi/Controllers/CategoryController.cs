@@ -15,6 +15,7 @@ namespace MVCProjeKampi.Controllers
     {
         // GET: Category
         CategoryManager cm = new CategoryManager(new EfCategoryDal());  //businessLayerda oluşturduğumuz sınıfı çağırıyoruz
+  
         public ActionResult Index()
         {
             return View();
