@@ -36,6 +36,9 @@ namespace MVCProjeKampi.Controllers
 
             var contact = _context.Contact.Count().ToString();
             ViewBag.contact = contact;
+
+            var draft = _context.Drafts.Count(x=>x.DraftReceiverMail=="admin@gmail.com").ToString();
+            ViewBag.draft = draft;
             return PartialView();
         }
     }

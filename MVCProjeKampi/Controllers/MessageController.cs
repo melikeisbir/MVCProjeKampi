@@ -15,6 +15,7 @@ namespace MVCProjeKampi.Controllers
     {
         // GET: Message
         MessageManager mm = new MessageManager(new EfMessageDal());
+        DraftManager dm = new DraftManager(new EfDraftDal());
         MessageValidator messagevalidator = new MessageValidator();
         [Authorize]
         public ActionResult Inbox()
@@ -40,26 +41,40 @@ namespace MVCProjeKampi.Controllers
         [HttpGet]
         public ActionResult NewMessage()
         {
-            return View();  
+            return View();
         }
         [HttpPost]
-        public ActionResult NewMessage(Message p)
+        [ValidateInput(false)]
+        public ActionResult NewMessage(Message p, String draftButton, String sendButton)
         {
             ValidationResult results = messagevalidator.Validate(p);
-            if (results.IsValid)
-            {
-                p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                mm.MessageAdd(p);
-                return RedirectToAction("Sendbox");
-            }
-            else
-            {
-                foreach (var item in results.Errors)
+            if (!string.IsNullOrEmpty(sendButton))
+
+                if (results.IsValid)
                 {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                    p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                    mm.MessageAdd(p);
+                    return RedirectToAction("Sendbox");
                 }
+                else
+                {
+                    foreach (var item in results.Errors)
+                    {
+                        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                    }
+                }
+            if (!string.IsNullOrEmpty(draftButton))
+            {
+                Draft _draft = new Draft();
+                _draft.DraftMessageContent = p.MessageContent;
+                _draft.DraftMessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                _draft.DraftReceiverMail = p.ReceiverMail;
+                _draft.DraftSenderMail = p.SenderMail;
+                _draft.DraftSubject = p.Subject;
+                dm.DraftAddBL(_draft);
+                return RedirectToAction("Index", "Draft");
             }
-            return View(p);
+            return View();
         }
     }
 }
