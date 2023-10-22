@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class MessageManager: IMessageService
+    public class MessageManager : IMessageService
     {
         IMessageDal _messageDal;
 
@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public Message GetByID(int id)
         {
-            return _messageDal.Get(x=>x.MessageID== id);    
+            return _messageDal.Get(x => x.MessageID == id);
         }
 
         public void MessageDelete(Message message)
@@ -46,6 +46,16 @@ namespace BusinessLayer.Concrete
         public List<Message> GetListSendbox()
         {
             return _messageDal.List(x => x.SenderMail == "admin@gmail.com");
+        }
+
+        public int GetUnReadenInboxNumber(string mail)
+        {
+            return _messageDal.List(x => x.ReceiverMail == mail && x.MessageIsReaden == false).Count();
+        }
+
+        public int GetUnReadenSendboxNumber(string mail)
+        {
+            return _messageDal.List(x => x.SenderMail == mail && x.MessageIsReaden == false).Count();
         }
     }
 }
