@@ -76,5 +76,36 @@ namespace MVCProjeKampi.Controllers
             }
             return View();
         }
+        public ActionResult Readen(int id)
+        {
+            var values = mm.GetByID(id);
+            values.MessageIsReaden = true;
+            mm.MessageUpdate(values);
+            return RedirectToAction("Inbox");
+        }
+
+        public ActionResult UnReaden(int id)
+        {
+            var values = mm.GetByID(id);
+            values.MessageIsReaden = false;
+            mm.MessageUpdate(values);
+            return RedirectToAction("Inbox");
+        }
+
+        public ActionResult SenReaden(int id)
+        {
+            var values = mm.GetByID(id);
+            values.MessageIsReaden = true;
+            mm.MessageUpdate(values);
+            return RedirectToAction("Sendbox");
+        }
+
+        public ActionResult SenUnReaden(int id)
+        {
+            var values = mm.GetByID(id);
+            values.MessageIsReaden = false;
+            mm.MessageUpdate(values);
+            return RedirectToAction("Sendbox");
+        }
     }
 }

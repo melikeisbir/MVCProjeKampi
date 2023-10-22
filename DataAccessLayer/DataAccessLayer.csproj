@@ -118,6 +118,10 @@
     <Compile Include="Migrations\202310191704109_mig_adddraftclass.designer.cs">
       <DependentUpon>202310191704109_mig_adddraftclass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310221049206_mig_messagereaden.cs" />
+    <Compile Include="Migrations\202310221049206_mig_messagereaden.designer.cs">
+      <DependentUpon>202310221049206_mig_messagereaden.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310191704109_mig_adddraftclass.resx">
       <DependentUpon>202310191704109_mig_adddraftclass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310221049206_mig_messagereaden.resx">
+      <DependentUpon>202310221049206_mig_messagereaden.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
