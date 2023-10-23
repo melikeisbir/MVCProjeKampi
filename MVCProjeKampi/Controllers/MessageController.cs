@@ -31,11 +31,15 @@ namespace MVCProjeKampi.Controllers
         public ActionResult GetInboxMessageDetails(int id)
         {
             var values = mm.GetByID(id);
+            values.MessageIsReaden = true;
+            mm.MessageUpdate(values);
             return View(values);
         }
         public ActionResult GetSendboxMessageDetails(int id)
         {
             var values = mm.GetByID(id);
+            values.MessageIsReaden = true;
+            mm.MessageUpdate(values);
             return View(values);
         }
         [HttpGet]
