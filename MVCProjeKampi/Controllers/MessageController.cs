@@ -15,7 +15,6 @@ namespace MVCProjeKampi.Controllers
     {
         // GET: Message
         MessageManager mm = new MessageManager(new EfMessageDal());
-        DraftManager dm = new DraftManager(new EfDraftDal());
         MessageValidator messagevalidator = new MessageValidator();
         [Authorize]
         public ActionResult Inbox()
@@ -48,38 +47,25 @@ namespace MVCProjeKampi.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult NewMessage(Message p, String draftButton, String sendButton)
+        public ActionResult NewMessage(Message p)
         {
             ValidationResult results = messagevalidator.Validate(p);
-            if (!string.IsNullOrEmpty(sendButton))
-
-                if (results.IsValid)
-                {
-                    p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                    mm.MessageAdd(p);
-                    return RedirectToAction("Sendbox");
-                }
-                else
-                {
-                    foreach (var item in results.Errors)
-                    {
-                        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                    }
-                }
-            if (!string.IsNullOrEmpty(draftButton))
+            if (results.IsValid)
             {
-                Draft _draft = new Draft();
-                _draft.DraftMessageContent = p.MessageContent;
-                _draft.DraftMessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                _draft.DraftReceiverMail = p.ReceiverMail;
-                _draft.DraftSenderMail = p.SenderMail;
-                _draft.DraftSubject = p.Subject;
-                dm.DraftAddBL(_draft);
-                return RedirectToAction("Index", "Draft");
+                p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                mm.MessageAdd(p);
+                return RedirectToAction("Sendbox");
             }
-            return View();
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View(p);
         }
+
         public ActionResult Readen(int id)
         {
             var values = mm.GetByID(id);
