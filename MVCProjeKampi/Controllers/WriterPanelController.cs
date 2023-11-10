@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace MVCProjeKampi.Controllers
     {
         // GET: WriterPanel
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
+        CategoryManager cm = new CategoryManager(new EfCategoryDal());
         public ActionResult WriterProfile()
         {
             return View();
@@ -21,6 +23,49 @@ namespace MVCProjeKampi.Controllers
             //id = 4;
             var values = hm.GetListByWriter();
             return View(values);
+        }
+        [HttpGet]
+        public ActionResult NewHeading()
+        {
+            List<SelectListItem> valueacategory = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString(),
+                                                   }
+                                                   ).ToList();
+            ViewBag.vlc = valueacategory;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult NewHeading(Heading p)
+        {
+            p.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            p.WriterID = 4;
+            p.HeadingStatus=true;
+            hm.HeadingAdd(p);
+            return RedirectToAction("MyHeading");
+        }
+
+        [HttpGet]
+        public ActionResult EditHeading(int id)
+        {
+            List<SelectListItem> valueacategory = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryID.ToString(),
+                                                   }
+                                                   ).ToList();
+            ViewBag.vlc = valueacategory;
+            var HeadingValue = hm.GetByID(id);
+            return View(HeadingValue);
+        }
+        [HttpPost]
+        public ActionResult EditHeading(Heading p)
+        {
+            hm.HeadingUpdate(p);
+            return RedirectToAction("MyHeading");
         }
     }
 }
