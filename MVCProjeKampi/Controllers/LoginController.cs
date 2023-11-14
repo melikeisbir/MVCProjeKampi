@@ -9,12 +9,13 @@ using System.Web.Security;
 
 namespace MVCProjeKampi.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         
         // GET: Login
         [HttpGet]
-        [AllowAnonymous]
+       
         public ActionResult Index()
         {
             return View();
