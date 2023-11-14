@@ -13,11 +13,13 @@ namespace MVCProjeKampi.Controllers
 {
     public class ContactController : Controller
     {
+        
         // GET: Contact
         Context _context = new Context();
         ContactManager cm = new ContactManager(new EfContactDal());
         ContactValidator cv= new ContactValidator();
         MessageManager mm = new MessageManager(new EfMessageDal());
+        
         public ActionResult Index()
         {
             var contactvalues=cm.GetList();

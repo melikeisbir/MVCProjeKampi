@@ -11,8 +11,10 @@ namespace MVCProjeKampi.Controllers
 {
     public class LoginController : Controller
     {
+        
         // GET: Login
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
