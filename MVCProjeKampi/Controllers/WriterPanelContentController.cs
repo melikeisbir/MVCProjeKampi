@@ -25,8 +25,9 @@ namespace MVCProjeKampi.Controllers
             return View(contentvalues);
         }
         [HttpGet]
-        public ActionResult AddContent()
+        public ActionResult AddContent(int id)
         {
+            ViewBag.d = id;
             return View(); 
         }
         [HttpPost]
@@ -39,6 +40,10 @@ namespace MVCProjeKampi.Controllers
             p.ContentStatus = true;
             cm.ContentAdd(p);
             return RedirectToAction("MyContent");
+        }
+        public ActionResult ToDoList()
+        {
+            return View();
         }
     }
 }
