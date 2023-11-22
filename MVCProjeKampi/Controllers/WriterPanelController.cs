@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace MVCProjeKampi.Controllers
 {
@@ -16,7 +18,7 @@ namespace MVCProjeKampi.Controllers
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         Context c = new Context();
-       
+
 
         public ActionResult WriterProfile()
         {
@@ -24,7 +26,7 @@ namespace MVCProjeKampi.Controllers
         }
         public ActionResult MyHeading(string p)
         {
-            
+
             p = (string)Session["WriterMail"];
             var writeridinfo = c.Writers.Where(x => x.WriterMail == p).Select(y => y.WriterID).FirstOrDefault();
             var values = hm.GetListByWriter(writeridinfo);
@@ -50,7 +52,7 @@ namespace MVCProjeKampi.Controllers
             var writeridinfo = c.Writers.Where(x => x.WriterMail == writermailinfo).Select(y => y.WriterID).FirstOrDefault();
             p.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             p.WriterID = writeridinfo;
-            p.HeadingStatus=true;
+            p.HeadingStatus = true;
             hm.HeadingAdd(p);
             return RedirectToAction("MyHeading");
         }
@@ -82,9 +84,9 @@ namespace MVCProjeKampi.Controllers
             hm.HeadingDelete(HeadingValue);
             return RedirectToAction("MyHeading");
         }
-        public ActionResult AllHeading()
+        public ActionResult AllHeading(int p = 1) // 1 ifadesi allheading sayfasında sayfalama işleminin kaçtan başlayacağnı ifade eder
         {
-            var headings = hm.GetList();
+            var headings = hm.GetList().ToPagedList(p,4); //(3,4) olsaydı 3. dörtlü grubu getir demekti
             return View(headings);
 
         }

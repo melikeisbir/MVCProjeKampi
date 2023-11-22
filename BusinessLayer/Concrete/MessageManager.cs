@@ -17,12 +17,6 @@ namespace BusinessLayer.Concrete
         {
             _messageDal = messageDal;
         }
-
-        public List<Message> GetListInbox()
-        {
-            return _messageDal.List(x => x.ReceiverMail == "mel@gmail.com");
-        }
-
         public void MessageAdd(Message message)
         {
             _messageDal.Insert(message);
@@ -42,10 +36,13 @@ namespace BusinessLayer.Concrete
         {
             _messageDal.Update(message);
         }
-
-        public List<Message> GetListSendbox()
+        public List<Message> GetListInbox(string p) //dışardan bir parametreyle işlem gerçekleştirecek IMessageService kısmında da ekliyoruz
         {
-            return _messageDal.List(x => x.SenderMail == "mel@gmail.com");
+            return _messageDal.List(x => x.ReceiverMail == p);
+        }
+        public List<Message> GetListSendbox(string p)
+        {
+            return _messageDal.List(x => x.SenderMail == p);
         }
 
         public int GetUnReadenInboxNumber(string mail)
