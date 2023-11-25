@@ -2081,6 +2081,15 @@
     <Content Include="AdminLTE-3.0.4\web\images\move_up.png" />
     <Content Include="AdminLTE-3.0.4\web\images\next.png" />
     <Content Include="AdminLTE-3.0.4\web\images\prev.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto1.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto2.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto3.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto4.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto5.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto6.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto7.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto8.png" />
+    <Content Include="AdminLTE-3.0.4\web\images\projectphoto9.png" />
     <Content Include="AdminLTE-3.0.4\web\images\serve.jpg" />
     <Content Include="AdminLTE-3.0.4\web\images\stats.jpg" />
     <Content Include="AdminLTE-3.0.4\web\images\testimonials.jpg" />
