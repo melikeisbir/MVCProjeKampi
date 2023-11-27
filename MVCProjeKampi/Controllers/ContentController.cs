@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCProjeKampi.Controllers
 {
+    [AllowAnonymous]
     public class ContentController : Controller
     {
         // GET: Content
@@ -16,6 +18,11 @@ namespace MVCProjeKampi.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult GetAllContent(string p)
+        {
+            var values = cm.GetList(p); //arama işlemi
+            return View(values);
         }
         public ActionResult ContentByHeading(int id) //içeriğe göre başlık getirme
         {
