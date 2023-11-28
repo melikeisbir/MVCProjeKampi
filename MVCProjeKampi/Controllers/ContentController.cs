@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace MVCProjeKampi.Controllers
 {
-    [AllowAnonymous]
     public class ContentController : Controller
     {
         // GET: Content
